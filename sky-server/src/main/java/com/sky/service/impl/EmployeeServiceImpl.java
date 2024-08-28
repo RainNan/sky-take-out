@@ -27,6 +27,7 @@ import java.util.List;
 
 @Service
 @Slf4j
+// 注意这里要实现对应的 Service 接口
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
