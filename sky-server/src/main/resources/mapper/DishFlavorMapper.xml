@@ -9,8 +9,10 @@
         insert into sky_take_out.dish_flavor
         (dish_id, name, value)
         values
-        <foreach collection="flavors" item="i" separator=",">
+        <foreach collection="list" item="i" separator=",">
             (#{i.dishId},#{i.name},#{value})
         </foreach>
     </insert>
+
+
 </mapper>

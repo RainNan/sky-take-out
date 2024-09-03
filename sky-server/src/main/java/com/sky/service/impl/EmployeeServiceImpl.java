@@ -110,7 +110,6 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @param employeePageQueryDTO
      * @return
      */
-    @Override
     public PageResult page(EmployeePageQueryDTO employeePageQueryDTO) {
         PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
         Page<Employee> page = employeeMapper.page(employeePageQueryDTO);
