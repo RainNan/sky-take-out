@@ -5,6 +5,8 @@ import com.sky.dto.CategoryPageQueryDTO;
 import com.sky.entity.Category;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 // 注意 Mapper 层是接口
 @Mapper
 public interface CategoryMapper {
@@ -57,4 +59,13 @@ public interface CategoryMapper {
      * @return
      */
     Category getByType(Integer type);
+
+    /**
+     * 根据类型查询分类
+     *
+     * @param type
+     * @return
+     */
+//    @Select("select * from sky_take_out.category where type = #{type}")
+    List<Category> list(Integer type);
 }

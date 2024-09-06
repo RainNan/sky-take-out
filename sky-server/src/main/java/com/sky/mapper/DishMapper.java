@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface DishMapper {
 
@@ -45,4 +47,14 @@ public interface DishMapper {
     void deleteById(Long id);
 
     void update(Dish dish);
+
+    /**
+     * 根据分类id查询菜品，要求是 status 为 1（起售）
+     *
+     * @param dish
+     * @return
+     */
+    @Select("select * from sky_take_out.dish " +
+            "where category_id = #{categoryId} and status = #{status}")
+    List<Dish> list(Dish dish);
 }

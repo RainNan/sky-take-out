@@ -9,6 +9,7 @@ import com.sky.service.SetmealService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,6 +27,7 @@ public class SetmealController {
      */
     @PostMapping
     @ApiOperation("新增套餐")
+    @CacheEvict(cacheNames = "setmealCache", key = "#setmealDTO.categoryId")
     public Result add(@RequestBody SetmealDTO setmealDTO) {
         setmealService.add(setmealDTO);
         return Result.success();
@@ -43,5 +45,6 @@ public class SetmealController {
         PageResult pageResult = setmealService.page(setmealPageQueryDTO);
         return Result.success(pageResult);
     }
+
 
 }

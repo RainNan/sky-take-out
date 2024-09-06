@@ -11,9 +11,14 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * 菜品管理
@@ -25,6 +30,8 @@ import java.util.List;
 public class DishController {
     @Autowired
     private DishService dishService;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
 
     /**
@@ -35,11 +42,11 @@ public class DishController {
      */
     @PostMapping
     @ApiOperation("新增菜品")
+    @CacheEvict(cacheNames = "dishCache", key = "#dishDTO.categoryId")
     public Result add(@RequestBody DishDTO dishDTO) {
         log.info("新增菜品");
         dishService.add(dishDTO);
         return Result.success();
-
     }
 
     /**
@@ -63,6 +70,7 @@ public class DishController {
      */
     @DeleteMapping
     @ApiOperation("根据菜品 id 删除菜品")
+    @CacheEvict(cacheNames = "dishCache", allEntries = true)
     public Result deleteById(@RequestParam List<Long> ids) {
         dishService.delete(ids);
         return Result.success();
@@ -89,6 +97,7 @@ public class DishController {
      */
     @PutMapping
     @ApiOperation("修改菜品")
+    @CachePut(cacheNames = "dishCache", key = "#dishDTO.categoryId")
     public Result update(@RequestBody DishDTO dishDTO) {
         // 还可以修改口味
         dishService.updateWithFlavor(dishDTO);

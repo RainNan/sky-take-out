@@ -102,5 +102,16 @@ public class CategoryServiceImpl implements CategoryService {
         return null;
     }
 
+    /**
+     * 根据类型查询分类
+     *
+     * @param type
+     * @return
+     */
+    public List<Category> list(Integer type) {
+        List<Category> list = categoryMapper.list(type);
+        return list;
+    }
+
 
 }

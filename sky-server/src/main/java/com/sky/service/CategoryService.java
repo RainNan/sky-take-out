@@ -5,6 +5,8 @@ import com.sky.dto.CategoryPageQueryDTO;
 import com.sky.entity.Category;
 import com.sky.result.PageResult;
 
+import java.util.List;
+
 public interface CategoryService {
     /**
      * 修改分类
@@ -50,4 +52,12 @@ public interface CategoryService {
      * @return
      */
     Category getByType(Integer type);
+
+    /**
+     * 根据类型查询分类
+     *
+     * @param type
+     * @return
+     */
+    List<Category> list(Integer type);
 }

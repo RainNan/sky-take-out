@@ -13,6 +13,8 @@ import org.apache.poi.hssf.record.chart.CategorySeriesAxisRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 分类管理
  */
@@ -106,4 +108,6 @@ public class CategoryController {
         Category category = categoryService.getByType(type);
         return Result.success(category);
     }
+
+
 }
